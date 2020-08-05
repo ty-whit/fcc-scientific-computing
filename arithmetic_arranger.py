@@ -1,4 +1,4 @@
-def arithmetic_arranger(problems):
+def arithmetic_arranger(problems,showSolution=False):
     spacer = ' '*4
     # Create empty lists to hold all problems
     firstLineParts = []
@@ -21,6 +21,8 @@ def arithmetic_arranger(problems):
     firstLine = ''
     secondLine = ''
     thirdLine = ''
+    # This list of buffers is used for proper formating if the solutions are shown. 
+    bufferList = []
 
     # Place each peice into the first and second lines, with appropriate spacing. 
     for i in range(len(problems)):
@@ -33,9 +35,11 @@ def arithmetic_arranger(problems):
         # if the second, use it instead.
         else:  
             buffer += len(secondLineParts[i])
-            
+        bufferList.append(buffer)
+
         ################ Debugging ################
-        # print(buffer)
+        #print(buffer)
+        #print(type(buffer))
         ###########################################
 
         # Add all the pieces together. 
@@ -45,5 +49,23 @@ def arithmetic_arranger(problems):
 
     # Add all 3 lines together with a new line in between and we have a finished product. 
     arranged_problems = firstLine + '\n' + secondLine + '\n' + thirdLine
+
+    # Code strictly to show the solution at the bottom of the display. 
+    # This code will not run unlss the solution is asked for. 
+    if showSolution:
+        # Convert numbers to integers for addition
+        firstLinePartsInt = [int(x) for x in firstLineParts]
+        secondLinePartsInt = [int(x) for x in secondLineParts]
+        # Check the operaation. If minus, second number is converted to negative. 
+        for i in range(len(operators)):
+            if operators[i] == '-': 
+                secondLinePartsInt[i] *= -1
+
+        # Add up each problem.
+        solutionsParts = [firstLinePartsInt[i] + secondLinePartsInt[i] for i in range(len(firstLinePartsInt))]
+        # Convert to formatted string.
+        solutions = spacer.join([str(solutionsParts[i]).rjust(bufferList[i],' ') for i in range(len(solutionsParts))])
+        # Add solutions to arranged problems. 
+        arranged_problems += '\n' + solutions
     
     return arranged_problems
