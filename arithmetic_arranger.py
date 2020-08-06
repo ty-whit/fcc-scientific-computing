@@ -83,3 +83,7 @@ def arithmetic_arranger(problems,showSolution=False):
 
 def checkNumberOfProbems(problems):
     assert len(problems) < 6, "Error: Too many problems."
+
+def checkCorrectOperators(operator)
+    for x in operators:
+        assert x == '+' or x == '-', "Error: Operator must be '+' or '-'."
