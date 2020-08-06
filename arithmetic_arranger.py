@@ -29,14 +29,8 @@ def arithmetic_arranger(problems,showSolution=False):
         return str(msg)
     ############################################
 
-    # Create empty strings for first line, second line, and bottom divider line
-    firstLine = ''
-    secondLine = ''
-    thirdLine = ''
-    # This list of buffers is used for proper formating if the solutions are shown. 
+    # Create a list of buffer space needed for each problem to be right aligned.  
     bufferList = []
-
-    # Place each peice into the first and second lines, with appropriate spacing. 
     for i in range(numProblems):
         # This buffer variable tells how much space is needed to right justify numbers. The value 2 is used to insure proper formating. 
         buffer = 2
@@ -54,11 +48,7 @@ def arithmetic_arranger(problems,showSolution=False):
         #print(type(buffer))
         ###########################################
 
-        # Add all the pieces together. 
-        #firstLine += firstLineParts[i].rjust(buffer,' ') + spacer
-        #secondLine += operators[i] + secondLineParts[i].rjust(buffer-1,' ') + spacer
-        #thirdLine += '-'*buffer + spacer
-
+    # Add all pieces together
     firstLine = spacer.join( [firstLineParts[i].rjust(bufferList[i],' ') for i in range(numProblems) ] )
     secondLine = spacer.join( [operators[i] + secondLineParts[i].rjust(bufferList[i]-1,' ') for i in range(numProblems) ] )
     thirdLine = spacer.join( ['-'*bufferList[i] for i in range(numProblems)])
