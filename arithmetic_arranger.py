@@ -21,7 +21,7 @@ def arithmetic_arranger(problems,showSolution=False):
     try:
         checkNumberOfProbems(problems)
         checkCorrectOperators(operators)
-    #checkOperands(firstLineParts,secondLineParts)
+        checkOperands(firstLineParts,secondLineParts)
     #checkOperandLengths(firstLineParts,secondLineParts)
     except AssertionError as msg:
         print(msg)
@@ -88,3 +88,6 @@ def checkCorrectOperators(operators):
     for x in operators:
         assert x == '+' or x == '-', "Error: Operator must be '+' or '-'."
 
+def checkOperands(firstLineParts,secondLineParts):
+    for x in firstLineParts+secondLineParts:
+        assert x.isdigit(), "Error: Numbers must only contain digits."
