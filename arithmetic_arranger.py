@@ -4,12 +4,14 @@ def arithmetic_arranger(problems,showSolution=False):
     firstLineParts = []
     secondLineParts = []
     operators = []
+    numProblems = 0
 
     # Separate each problem into their first line, second line, and operator coponants. 
     for prob in problems:
         firstLineParts.append(prob.split()[0])
         secondLineParts.append(prob.split()[2])
         operators.append(prob.split()[1])
+        numProblems += 1
     
     ################ Debugging ################
     #print(firstLineParts)
@@ -19,12 +21,11 @@ def arithmetic_arranger(problems,showSolution=False):
 
     ############## Error Checking ##############
     try:
-        checkNumberOfProbems(problems)
+        checkNumberOfProbems(numProblems)
         checkCorrectOperators(operators)
         checkOperands(firstLineParts,secondLineParts)
         checkOperandLengths(firstLineParts,secondLineParts)
     except AssertionError as msg:
-        #print(type(str(msg)))
         return str(msg)
     ############################################
 
@@ -36,7 +37,7 @@ def arithmetic_arranger(problems,showSolution=False):
     bufferList = []
 
     # Place each peice into the first and second lines, with appropriate spacing. 
-    for i in range(len(problems)):
+    for i in range(numProblems):
         # This buffer variable tells how much space is needed to right justify numbers. The value 2 is used to insure proper formating. 
         buffer = 2
 
@@ -54,9 +55,13 @@ def arithmetic_arranger(problems,showSolution=False):
         ###########################################
 
         # Add all the pieces together. 
-        firstLine += firstLineParts[i].rjust(buffer,' ') + spacer
-        secondLine += operators[i] + secondLineParts[i].rjust(buffer-1,' ') + spacer
-        thirdLine += '-'*buffer + spacer
+        #firstLine += firstLineParts[i].rjust(buffer,' ') + spacer
+        #secondLine += operators[i] + secondLineParts[i].rjust(buffer-1,' ') + spacer
+        #thirdLine += '-'*buffer + spacer
+
+    firstLine = spacer.join( [firstLineParts[i].rjust(bufferList[i],' ') for i in range(numProblems) ] )
+    secondLine = spacer.join( [operators[i] + secondLineParts[i].rjust(bufferList[i]-1,' ') for i in range(numProblems) ] )
+    thirdLine = spacer.join( ['-'*bufferList[i] for i in range(numProblems)])
 
     # Add all 3 lines together with a new line in between and we have a finished product. 
     arranged_problems = firstLine + '\n' + secondLine + '\n' + thirdLine
@@ -81,8 +86,8 @@ def arithmetic_arranger(problems,showSolution=False):
     
     return arranged_problems
 
-def checkNumberOfProbems(problems):
-    assert len(problems) < 6, 'Error: Too many problems.'
+def checkNumberOfProbems(numProblems):
+    assert numProblems < 6, 'Error: Too many problems.'
 
 def checkCorrectOperators(operators):
     for x in operators:
