@@ -17,6 +17,17 @@ def arithmetic_arranger(problems,showSolution=False):
     #print(operators)
     ###########################################
 
+    ############## Error Checking ##############
+    try:
+        checkNumberOfProbems(problems)
+        checkCorrectOperators(operators)
+        checkOperands(firstLineParts,secondLineParts)
+        checkOperandLengths(firstLineParts,secondLineParts)
+    except AssertionError as msg:
+        #print(type(str(msg)))
+        return str(msg)
+    ############################################
+
     # Create empty strings for first line, second line, and bottom divider line
     firstLine = ''
     secondLine = ''
@@ -69,3 +80,18 @@ def arithmetic_arranger(problems,showSolution=False):
         arranged_problems += '\n' + solutions
     
     return arranged_problems
+
+def checkNumberOfProbems(problems):
+    assert len(problems) < 6, 'Error: Too many problems.'
+
+def checkCorrectOperators(operators):
+    for x in operators:
+        assert x == '+' or x == '-', "Error: Operator must be '+' or '-'."
+
+def checkOperands(firstLineParts,secondLineParts):
+    for x in firstLineParts + secondLineParts:
+        assert x.isdigit(), "Error: Numbers must only contain digits."
+
+def checkOperandLengths(firstLineParts,secondLineParts):
+    for x in firstLineParts + secondLineParts:
+        assert len(x) < 5, "Error: Numbers cannot be more than four digits."
