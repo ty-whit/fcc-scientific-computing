@@ -20,7 +20,7 @@ def arithmetic_arranger(problems,showSolution=False):
     ############## Error Checking ##############
     try:
         checkNumberOfProbems(problems)
-    #checkCorrectOperators(operators)
+        checkCorrectOperators(operators)
     #checkOperands(firstLineParts,secondLineParts)
     #checkOperandLengths(firstLineParts,secondLineParts)
     except AssertionError as msg:
@@ -84,6 +84,7 @@ def arithmetic_arranger(problems,showSolution=False):
 def checkNumberOfProbems(problems):
     assert len(problems) < 6, "Error: Too many problems."
 
-def checkCorrectOperators(operator)
+def checkCorrectOperators(operators):
     for x in operators:
         assert x == '+' or x == '-', "Error: Operator must be '+' or '-'."
+
