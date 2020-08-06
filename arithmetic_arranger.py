@@ -24,8 +24,8 @@ def arithmetic_arranger(problems,showSolution=False):
         checkOperands(firstLineParts,secondLineParts)
         checkOperandLengths(firstLineParts,secondLineParts)
     except AssertionError as msg:
-        print(msg)
-        return ''
+        #print(type(str(msg)))
+        return str(msg)
     ############################################
 
     # Create empty strings for first line, second line, and bottom divider line
@@ -82,7 +82,7 @@ def arithmetic_arranger(problems,showSolution=False):
     return arranged_problems
 
 def checkNumberOfProbems(problems):
-    assert len(problems) < 6, "Error: Too many problems."
+    assert len(problems) < 6, 'Error: Too many problems.'
 
 def checkCorrectOperators(operators):
     for x in operators:
