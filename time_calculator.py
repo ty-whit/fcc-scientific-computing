@@ -11,7 +11,7 @@ def add_time(start, duration):
 
     finalTime = format_to_12hr(finalTime)
 
-    new_time = "{hour}:{minute} {am_pm} {days}".format(hour=finalTime[0],minute=finalTime[1],am_pm=finalTime[2],days=finalTime[3])
+    new_time = "{hour}:{minute} {am_pm}{days}".format(hour=finalTime[0],minute=finalTime[1],am_pm=finalTime[2],days=finalTime[3])
 
 
     #return "Not Finished"
@@ -57,20 +57,21 @@ def format_to_12hr(finalTime):
         if finalTime[0] == 0:
             finalTime[0] = "12"
     elif finalTime[0] in range(12,24):
-        finalTime[0] -= 12
+        if finalTime[0] > 12:
+            finalTime[0] -= 12
         am_pm = "PM"
     else:
         print("Error: Invalid hour found.")
         return None
 
-    hour = str(finalTime[0]).rjust(2,"0")
+    hour = str(finalTime[0])
 
     if finalTime[2] == 0:
         daysAfter = ""
     elif finalTime[2] == 1:
-        daysAfter = "(next day)"
+        daysAfter = " (next day)"
     else:
-        daysAfter = "({n} days later)".format(n=finalTime[2])
+        daysAfter = " ({n} days later)".format(n=finalTime[2])
 
 
     return [hour,minute,am_pm,daysAfter]
