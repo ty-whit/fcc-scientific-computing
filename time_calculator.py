@@ -1,4 +1,6 @@
-def add_time(start, duration):
+def add_time(start, duration,weekday = None):
+    weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
     start = separate_time_string(start)
     duration = separate_time_string(duration)
     
@@ -8,10 +10,20 @@ def add_time(start, duration):
     #print(finalTime)
 
     finalTime = correct_time_format24HR(finalTime) 
+    numDays = finalTime[2]
 
     finalTime = format_to_12hr(finalTime)
 
     new_time = "{hour}:{minute} {am_pm}{days}".format(hour=finalTime[0],minute=finalTime[1],am_pm=finalTime[2],days=finalTime[3])
+
+    if weekday is not None:
+        weekday = weekday.title()
+        if weekday in weekdays:
+            #print("Day of week given:", weekday)
+            index = (weekdays.index(weekday) + numDays) % 7 
+            #print(weekdays.index(weekday), numDays, index)
+            newDay = weekdays[index]
+            new_time = "{hour}:{minute} {am_pm}, {day}{days}".format(hour=finalTime[0],minute=finalTime[1],am_pm=finalTime[2],day=newDay,days=finalTime[3])
 
 
     #return "Not Finished"
