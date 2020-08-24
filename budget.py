@@ -1,5 +1,7 @@
 class Category:
-    def __init__(self):
+    def __init__(self,name):
+        self.name = name
+        self.ledger = dict()
         pass
 
     def deposit(self):
