@@ -12,9 +12,12 @@ class Category:
         if self.check_funds(amount):
             self.ledger.append({"amount": -1 * amount, "description": description})
         return 
-        
+
     def get_balance(self):
-        pass
+        balance = 0
+        for transaction in self.ledger:
+            balance += transaction["amount"]
+        return balance
 
     def transfer(self): 
         pass
