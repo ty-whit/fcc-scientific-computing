@@ -8,7 +8,7 @@ class Category:
         self.ledger.append({"amount": amount, "description": description})
         return
 
-    def withdraw(self,amount, description): 
+    def withdraw(self, amount, description = ""): 
         sufficientFunds = self.check_funds(amount)
         if sufficientFunds:
             self.ledger.append({"amount": -1 * amount, "description": description}) 
