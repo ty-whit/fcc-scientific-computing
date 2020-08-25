@@ -9,9 +9,10 @@ class Category:
         return
 
     def withdraw(self,amount, description): 
-        if self.check_funds(amount):
-            self.ledger.append({"amount": -1 * amount, "description": description})
-        return 
+        funds = self.check_funds(amount)
+        if funds:
+            self.ledger.append({"amount": -1 * amount, "description": description}) 
+        return funds
 
     def get_balance(self):
         balance = 0
@@ -23,7 +24,11 @@ class Category:
         pass
 
     def check_funds(self,amount): 
-        pass
+        balance = self.get_balance()
+        diff = balance - amount
+        if diff < 0:
+            return False
+        return True
 
 
 def create_spend_chart(categories):
