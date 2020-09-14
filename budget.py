@@ -3,12 +3,22 @@ class Category:
         self.name = name
         self.ledger = [ ]
         return
+    
+    def __str__(self):
+        printString = self.name.center(30,'*') + '\n'
+        
+        for i in range(len(self.ledger)):
+            printString += self.ledger[i]['description'][:23].ljust(23,' ')
+            printString += str(self.ledger[i]['amount']).rjust(7,' ')
+            printString += '\n'
 
-    def deposit(self, amount, description = ""):
-        self.ledger.append({"amount": amount, "description": description})
+        return printString
+
+    def deposit(self, amount, description = ''):
+        self.ledger.append({'amount': amount, 'description': description})
         return
 
-    def withdraw(self, amount, description = ""): 
+    def withdraw(self, amount, description = ''): 
         sufficientFunds = self.check_funds(amount)
         if sufficientFunds:
             self.ledger.append({"amount": -amount, "description": description}) 
@@ -17,14 +27,14 @@ class Category:
     def get_balance(self):
         balance = 0
         for transaction in self.ledger:
-            balance += transaction["amount"]
+            balance += transaction['amount']
         return balance
 
     def transfer(self,amount, account): 
         sufficientFunds = self.check_funds(amount)
         if sufficientFunds: 
-            self.withdraw(amount,"Transfer to " + account.name)
-            account.deposit(amount,"Transfer from " + self.name)
+            self.withdraw(amount,'Transfer to ' + account.name)
+            account.deposit(amount,'Transfer from ' + self.name)
         return sufficientFunds
 
     def check_funds(self,amount): 
@@ -42,30 +52,31 @@ def create_spend_chart(categories):
     for cat in categories: 
         # Amount spent by current category  in loop
         catSpending = 0
-
+        print('Spending on',cat.name)
         # Loop through each category
         for transaction in cat.ledger:
             # If transaction was positive, it was a deposit. 
             # If negative, it was money spent. 
-            if transaction["amount"] > 0: 
+            if transaction['amount'] < 0: 
                 # Subtract negative number to create positive spending amount. 
-                catSpending -= transaction["amount"]
+                catSpending -= transaction['amount']
 
             # Append total spent on current category to list created above.
         spendingList.append(catSpending)
+        print('---',catSpending)
     
     # Calculate the total spending to find percentage of each category.
     totalSpending = sum(spendingList)
 
     # Start creating the string to be printed. Saved as a list of lines. 
-    printStringList = [ "Percentage spent by category" ]
+    printStringList = [ 'Percentage spent by category' ]
 
     # labels for Y-axis
     percentages = range(100, -1, -10)
 
     # Add label and axis to each line in graph.
     for percent in percentages:
-        printStringList.append(str(percent).rjust(3," ") + "| ")
+        printStringList.append(str(percent).rjust(3,' ') + '| ')
     
     # Draw bar for each category  
     for cat in range(len(categories)):
@@ -77,7 +88,7 @@ def create_spend_chart(categories):
                 printStringList[i] += '   ' 
             else: 
                 # then draw a dot 
-                printStringList[i] += "o  "
+                printStringList[i] += 'o  '
 
     # Draw the bottom line that forms the x-axis
     printStringList.append('    '.ljust(len(printStringList[-1]),'-'))
@@ -113,9 +124,9 @@ def create_spend_chart(categories):
 
         printStringList.append(newLine)
 
-    finalString = ''
+    finalString = printStringList[0]
 
-    for line in printStringList:
-        finalString += line + "\n"
+    for line in printStringList[1:]:
+        finalString += '\n' + line
 
     return finalString
