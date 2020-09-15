@@ -19,7 +19,7 @@ class Rectangle:
         return 2 *(self.width + self.height)
 
     def get_diagonal(self):
-        pass
+        return (self.width**2 + self.height**2)**(1/2)
 
     def get_picture(self):
         pass
