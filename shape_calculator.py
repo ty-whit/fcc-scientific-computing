@@ -34,5 +34,7 @@ class Rectangle:
 
 class Square(Rectangle):
     def set_side(self, side):
-        pass
+        self.set_width(side)
+        self.set_height(side)
+        return
 
