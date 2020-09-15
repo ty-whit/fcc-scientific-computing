@@ -1,12 +1,16 @@
 class Rectangle:
     def __init__(self, width, height):
-        pass
+        self.set_width(width)
+        self.set_height(height)
+        return
     
     def set_width(self, width):
-        pass
+        self.width = width
+        return
 
     def set_height(self, height):
-        pass
+        self.height = height
+        return
 
     def get_area(self):
         pass
