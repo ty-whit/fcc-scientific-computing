@@ -4,6 +4,9 @@ class Rectangle:
         self.set_height(height)
         return
     
+    def __str__(self):
+        return 'Rectangle(Width=' + str(self.width) + ', height=' + str(self.height) + ')'
+    
     def set_width(self, width):
         self.width = width
         return
