@@ -30,7 +30,7 @@ class Rectangle:
         return printString
 
     def get_amount_inside(self, rect):
-        pass
+        return self.get_area() / rect.get_area()
 
 class Square(Rectangle):
     def set_side(self, side):
