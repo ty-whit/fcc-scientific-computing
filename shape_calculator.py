@@ -33,6 +33,10 @@ class Rectangle:
         return self.get_area() / rect.get_area()
 
 class Square(Rectangle):
+    def __init__(self,side):
+        self.set_side(side)
+        return 
+        
     def set_side(self, side):
         self.set_width(side)
         self.set_height(side)
