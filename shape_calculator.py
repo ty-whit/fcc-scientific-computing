@@ -25,7 +25,9 @@ class Rectangle:
         return (self.width**2 + self.height**2)**(1/2)
 
     def get_picture(self):
-        pass
+        printString  = '*'*self.width + '\n'
+        printString *= self.height
+        return printString
 
     def get_amount_inside(self, rect):
         pass
