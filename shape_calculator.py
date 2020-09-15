@@ -13,7 +13,7 @@ class Rectangle:
         return
 
     def get_area(self):
-        pass
+        return self.width * self.height
 
     def get_perimeter(self):
         pass
