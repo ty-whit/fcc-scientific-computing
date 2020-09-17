@@ -15,20 +15,21 @@ class Hat:
             for i in range(val):
                 # And add it to the contents of the hat
                 self.contents.append(key)
+        self.backup = copy.copy(self.contents)
         return
     
     def draw(self,numBalls):
-        # Make a copy of the hat that we can pull balls from
-        contents_copy = copy.copy(self.contents)
+        # Ensure that all balls are put back into the hat.
+        self.contents = copy.copy(self.backup)
         # Create a pile of the balls that we have removed
         ballsRemoved = []
         
         # Loop over number of balls to be removed
         for i in range(numBalls):
             # Remove a random ball, and add it to the pile
-            ballsRemoved.append(contents_copy.pop(random.randint(0,len(contents_copy)-1)))
+            ballsRemoved.append(self.contents.pop(random.randint(0,len(self.contents)-1)))
             # If there are no more balls in the hat
-            if len(contents_copy) == 0:
+            if len(self.contents) == 0:
                 # break the loop
                  break
         
