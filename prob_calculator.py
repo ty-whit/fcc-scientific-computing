@@ -36,4 +36,35 @@ class Hat:
         return ballsRemoved
         
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    pass
+    # count of the number of experiments that have been successful
+    successfulExperimentsCount = 0
+
+    # Run through all the experiments
+    for i in range(num_experiments):
+        # Initially assume that the experiment is successful
+        successfulExperiment = True
+        # run through the experiment
+        ballsRemoved = hat.draw(num_balls_drawn)
+        
+        # Set up a dictionary to count up the number of balls in the experiment
+        ballsCount = {}
+        # Loop through each color
+        for color in expected_balls.keys():
+            # Count up the balls actually removed from the hat
+            ballsCount[color] = ballsRemoved.count(color)
+
+            # Check to see if we removed enough balls 
+            if ballsCount[color] < expected_balls[color]:
+                # If not, we failed the experiment
+                successfulExperiment = False
+                # we don't need to run through any other color if we have failed.
+                continue
+
+        # If this experiment was successful
+        if successfulExperiment: 
+            # then add it to the total count.
+            successfulExperimentsCount += 1
+        
+    # calculate the probability of the result. 
+    probability = successfulExperimentsCount/num_experiments
+    return probability
