@@ -17,8 +17,23 @@ class Hat:
                 self.contents.append(key)
         return
     
-    def draw(self):
-        pass
-
+    def draw(self,numBalls):
+        # Make a copy of the hat that we can pull balls from
+        contents_copy = copy.copy(self.contents)
+        # Create a pile of the balls that we have removed
+        ballsRemoved = []
+        
+        # Loop over number of balls to be removed
+        for i in range(numBalls):
+            # Remove a random ball, and add it to the pile
+            ballsRemoved.append(contents_copy.pop(random.randint(0,len(contents_copy)-1)))
+            # If there are no more balls in the hat
+            if len(contents_copy) == 0:
+                # break the loop
+                 break
+        
+        # Return the balls removed to the caller
+        return ballsRemoved
+        
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     pass
